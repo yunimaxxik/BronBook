@@ -2,6 +2,15 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { api } from '../../api/axios';
 import type { User } from '../../interfaces/User';
 
+const loadUserFromStorage = (): User | null => {
+  try {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
+  } catch {
+    return null;
+  }
+};
+
 interface AuthState {
   user: User | null;
   isLoading: boolean;
@@ -9,7 +18,7 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  user: null,
+  user: loadUserFromStorage(),
   isLoading: false,
   error: null
 };
@@ -65,6 +74,7 @@ const authSlice = createSlice({
     builder
       .addCase(login.fulfilled, (state, action: PayloadAction<User>) => {
         state.user = action.payload;
+        localStorage.setItem('user', JSON.stringify(action.payload));
         state.error = null;
       })
       .addCase(login.rejected, (state, action) => {
@@ -79,6 +89,7 @@ const authSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
+        localStorage.removeItem('user');
       });
   }
 });

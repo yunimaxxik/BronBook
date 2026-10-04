@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ProtectedRoute } from './components/ProtectedRouter';
+import { ProtectedRoute } from './components/ProtectedRoute';
 import LoginPage from './pages/LoginPage';
+import CatalogPage from './pages/CatalogPage';
+import AdminPage from './pages/AdminPage';
 
 function App() {
   return (
@@ -13,18 +15,18 @@ function App() {
         />
         <Route
           path="/register"
-          element={<div>Страница регистрации (сделай по аналогии с Login)</div>}
+          element={<div>Страница регистрации (сделаем позже)</div>}
         />
 
         {/* Защищенные роуты */}
         <Route element={<ProtectedRoute />}>
           <Route
             path="/"
-            element={<div>Главная страница (Каталог книг)</div>}
+            element={<CatalogPage />}
           />
           <Route
-            path="/profile"
-            element={<div>Личный кабинет</div>}
+            path="/admin"
+            element={<AdminPage />}
           />
         </Route>
 
