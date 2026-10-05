@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../features/auth/authSlice';
-import { RootState, AppDispatch } from '../store';
+import { login } from '../../features/auth/authSlice';
+import { RootState, AppDispatch } from '../../store';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');

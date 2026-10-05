@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '../store';
-import { fetchLibraries } from '../features/books/booksSlice';
-import { api } from '../api/axios';
+import { RootState, AppDispatch } from '../../store';
+import { fetchLibraries } from '../../features/books/booksSlice';
+import { api } from '../../api/axios';
 
 export default function AdminPage() {
   const dispatch = useDispatch<AppDispatch>();

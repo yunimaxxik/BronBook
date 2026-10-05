@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '../store';
+import { RootState, AppDispatch } from '../../store';
 import {
   fetchBooks,
   fetchLibraries,
   setFilter,
   clearFilters
-} from '../features/books/booksSlice';
+} from '../../features/books/booksSlice';
 
 export default function CatalogPage() {
   const dispatch = useDispatch<AppDispatch>();
