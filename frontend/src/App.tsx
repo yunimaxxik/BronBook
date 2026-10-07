@@ -4,6 +4,8 @@ import Header from './components/Header/Header';
 import LoginPage from './pages/LoginPage/LoginPage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
 import CatalogPage from './pages/CatalogPage/CatalogPage';
+import BookDetailPage from './pages/BookDetailPage/BookDetailPage';
+import ProfilePage from './pages/ProfilePage/ProfilePage';
 import AdminPage from './pages/AdminPage/AdminPage';
 
 function App() {
@@ -33,12 +35,16 @@ function App() {
                 element={<CatalogPage />}
               />
               <Route
-                path="/admin"
-                element={<AdminPage />}
+                path="/books/:id"
+                element={<BookDetailPage />}
               />
               <Route
                 path="/profile"
-                element={<div>Мои аренды (сделаем на 3-й неделе)</div>}
+                element={<ProfilePage />}
+              />
+              <Route
+                path="/admin"
+                element={<AdminPage />}
               />
             </Route>
 

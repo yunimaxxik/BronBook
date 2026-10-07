@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../store';
 import {
@@ -127,51 +128,57 @@ export default function CatalogPage() {
           }}
         >
           {books.map((book) => (
-            <div
+            <Link
               key={book.id}
-              style={{
-                border: '1px solid #ddd',
-                borderRadius: '8px',
-                padding: '15px'
-              }}
+              to={`/books/${book.id}`}
+              style={{ textDecoration: 'none', color: 'inherit' }}
             >
-              {book.coverImage && (
-                <img
-                  src={`http://localhost:3000${book.coverImage}`}
-                  alt={book.title}
-                  style={{
-                    width: '100%',
-                    height: '200px',
-                    objectFit: 'cover',
-                    borderRadius: '4px',
-                    marginBottom: '10px'
-                  }}
-                />
-              )}
-              <h3 style={{ margin: '0 0 5px 0' }}>{book.title}</h3>
-              <p style={{ margin: '0 0 5px 0', color: '#666' }}>
-                {book.author}
-              </p>
-              {book.year && (
-                <p style={{ margin: '0 0 5px 0', fontSize: '14px' }}>
-                  {book.year}
-                </p>
-              )}
-              <p style={{ margin: '0 0 5px 0', fontSize: '14px' }}>
-                Библиотека: {book.library?.name || 'Неизвестно'}
-              </p>
-              <p
+              <div
+                key={book.id}
                 style={{
-                  margin: '0',
-                  fontSize: '14px',
-                  color: book.isAvailable ? 'green' : 'red'
+                  border: '1px solid #ddd',
+                  borderRadius: '8px',
+                  padding: '15px'
                 }}
               >
-                {book.isAvailable
-                  ? `Доступно: ${book.availableCopies} из ${book.totalCopies}`
-                  : 'Недоступно'}
-              </p>
-            </div>
+                {book.coverImage && (
+                  <img
+                    src={`http://localhost:3000${book.coverImage}`}
+                    alt={book.title}
+                    style={{
+                      width: '100%',
+                      height: '200px',
+                      objectFit: 'cover',
+                      borderRadius: '4px',
+                      marginBottom: '10px'
+                    }}
+                  />
+                )}
+                <h3 style={{ margin: '0 0 5px 0' }}>{book.title}</h3>
+                <p style={{ margin: '0 0 5px 0', color: '#666' }}>
+                  {book.author}
+                </p>
+                {book.year && (
+                  <p style={{ margin: '0 0 5px 0', fontSize: '14px' }}>
+                    {book.year}
+                  </p>
+                )}
+                <p style={{ margin: '0 0 5px 0', fontSize: '14px' }}>
+                  Библиотека: {book.library?.name || 'Неизвестно'}
+                </p>
+                <p
+                  style={{
+                    margin: '0',
+                    fontSize: '14px',
+                    color: book.isAvailable ? 'green' : 'red'
+                  }}
+                >
+                  {book.isAvailable
+                    ? `Доступно: ${book.availableCopies} из ${book.totalCopies}`
+                    : 'Недоступно'}
+                </p>
+              </div>
+            </Link>
           ))}
         </div>
       )}

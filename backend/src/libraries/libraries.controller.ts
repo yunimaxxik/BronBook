@@ -17,6 +17,7 @@ import { CreateLibraryDto } from './dto/create-library.dto.js';
 import { Roles, RolesGuard } from '../common/guards/roles.guard.js';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
+import { SessionAuthGuard } from '../common/guards/session-auth.guard.js';
 
 @Controller()
 export class LibrariesController {
@@ -52,7 +53,7 @@ export class LibrariesController {
 
   // === Админские эндпоинты ===
 
-  @UseGuards(AuthGuard('local'), RolesGuard)
+  @UseGuards(SessionAuthGuard, RolesGuard)
   @Roles('admin')
   @Post('api/admin/libraries')
   async createLibrary(@Body() dto: CreateLibraryDto) {
