@@ -10,18 +10,6 @@ import { AuthGuard } from '@nestjs/passport';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Post('api/debug/create-admin')
-  async createAdmin() {
-    const bcrypt = await import('bcrypt');
-    const passwordHash = await bcrypt.hash('admin123', 10);
-    return this.authService['usersService'].create({
-      email: 'admin@test.com',
-      passwordHash,
-      name: 'Admin',
-      role: 'admin',
-    });
-  }
-
   @Post('api/client/register')
   async register(@Body() registerDto: RegisterDto) {
     return this.authService.register(registerDto);
