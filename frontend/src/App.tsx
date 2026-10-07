@@ -1,4 +1,3 @@
-// frontend/src/App.tsx
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import Header from './components/Header/Header';
@@ -8,6 +7,8 @@ import CatalogPage from './pages/CatalogPage/CatalogPage';
 import BookDetailPage from './pages/BookDetailPage/BookDetailPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 import AdminPage from './pages/AdminPage/AdminPage';
+import SupportPage from './pages/SupportPage/SupportPage';
+import ManagerSupportPage from './pages/ManagerSupportPage/ManagerSupportPage';
 import './App.css';
 
 function App() {
@@ -45,6 +46,14 @@ function App() {
               <Route
                 path="/admin"
                 element={<AdminPage />}
+              />
+              <Route
+                path="/support"
+                element={<SupportPage />}
+              />
+              <Route
+                path="/manager/support"
+                element={<ManagerSupportPage />}
               />
             </Route>
 

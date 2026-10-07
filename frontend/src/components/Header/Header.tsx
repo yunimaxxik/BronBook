@@ -40,6 +40,12 @@ export default function Header() {
             >
               Мои аренды
             </Link>
+            <Link
+              to="/support"
+              className="header__nav-link"
+            >
+              Поддержка
+            </Link>
             {user.role === 'admin' && (
               <Link
                 to="/admin"
