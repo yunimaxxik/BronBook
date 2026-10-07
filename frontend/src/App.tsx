@@ -1,3 +1,4 @@
+// frontend/src/App.tsx
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import Header from './components/Header/Header';
@@ -7,18 +8,17 @@ import CatalogPage from './pages/CatalogPage/CatalogPage';
 import BookDetailPage from './pages/BookDetailPage/BookDetailPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 import AdminPage from './pages/AdminPage/AdminPage';
+import './App.css';
 
 function App() {
   return (
     <BrowserRouter>
-      <div
-        style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}
-      >
+      <div className="app-layout">
         <Header />
 
-        <main style={{ flex: 1, padding: '20px' }}>
+        <main className="app-main">
           <Routes>
-            {/* Публичные роуты (без Header внутри, но Header уже сверху) */}
+            {/* Публичные роуты */}
             <Route
               path="/login"
               element={<LoginPage />}
@@ -61,15 +61,7 @@ function App() {
           </Routes>
         </main>
 
-        <footer
-          style={{
-            textAlign: 'center',
-            padding: '20px',
-            backgroundColor: '#f5f5f5',
-            color: '#666',
-            fontSize: '14px'
-          }}
-        >
+        <footer className="app-footer">
           © 2026 BronBook. Дипломный проект Нетологии.
         </footer>
       </div>

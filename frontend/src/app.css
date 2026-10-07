@@ -1,0 +1,20 @@
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main {
+  flex: 1;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.app-footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #f5f5f5;
+  color: #666;
+  font-size: 14px;
+  border-top: 1px solid #e0e0e0;
+}

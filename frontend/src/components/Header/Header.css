@@ -1,0 +1,86 @@
+.header {
+  background-color: #1a1a2e;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.header__logo {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.header__nav {
+  display: flex;
+  gap: 20px;
+}
+
+.header__nav-link {
+  color: white;
+  text-decoration: none;
+}
+
+.header__nav-link--admin {
+  color: #ffd700;
+}
+
+.header__nav-link--manager {
+  color: #90ee90;
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header__user-info {
+  font-size: 14px;
+}
+
+.header__user-role {
+  margin-left: 8px;
+  font-size: 12px;
+  color: #aaa;
+}
+
+.header__logout-btn {
+  padding: 8px 16px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.header__logout-btn:hover {
+  background-color: #c0392b;
+}
+
+.header__login-link {
+  color: white;
+  text-decoration: none;
+}
+
+.header__register-link {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.header__register-link:hover {
+  background-color: #0056b3;
+}

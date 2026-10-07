@@ -1,7 +1,9 @@
+// frontend/src/components/Header.tsx
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../store';
 import { logout } from '../../features/auth/authSlice';
+import './Header.css'; // <-- Импортируем CSS файл
 
 export default function Header() {
   const dispatch = useDispatch<AppDispatch>();
@@ -14,48 +16,34 @@ export default function Header() {
   };
 
   return (
-    <header
-      style={{
-        backgroundColor: '#1a1a2e',
-        color: 'white',
-        padding: '15px 30px',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-      }}
-    >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '30px' }}>
+    <header className="header">
+      <div className="header__left">
         <Link
           to="/"
-          style={{
-            color: 'white',
-            textDecoration: 'none',
-            fontSize: '20px',
-            fontWeight: 'bold'
-          }}
+          className="header__logo"
         >
-          📚 BronBook
+          <img src="../../assets/books.svg" />
+          BronBook
         </Link>
 
         {user && (
-          <nav style={{ display: 'flex', gap: '20px' }}>
+          <nav className="header__nav">
             <Link
               to="/"
-              style={{ color: 'white', textDecoration: 'none' }}
+              className="header__nav-link"
             >
               Каталог
             </Link>
             <Link
               to="/profile"
-              style={{ color: 'white', textDecoration: 'none' }}
+              className="header__nav-link"
             >
               Мои аренды
             </Link>
             {user.role === 'admin' && (
               <Link
                 to="/admin"
-                style={{ color: '#ffd700', textDecoration: 'none' }}
+                className="header__nav-link header__nav-link--admin"
               >
                 Админ-панель
               </Link>
@@ -63,7 +51,7 @@ export default function Header() {
             {user.role === 'manager' && (
               <Link
                 to="/manager"
-                style={{ color: '#90ee90', textDecoration: 'none' }}
+                className="header__nav-link header__nav-link--manager"
               >
                 Панель менеджера
               </Link>
@@ -72,27 +60,16 @@ export default function Header() {
         )}
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+      <div className="header__right">
         {user ? (
           <>
-            <span style={{ fontSize: '14px' }}>
+            <span className="header__user-info">
               Привет, <strong>{user.name}</strong>!
-              <span
-                style={{ marginLeft: '8px', fontSize: '12px', color: '#aaa' }}
-              >
-                ({user.role})
-              </span>
+              <span className="header__user-role">({user.role})</span>
             </span>
             <button
               onClick={handleLogout}
-              style={{
-                padding: '8px 16px',
-                backgroundColor: '#e74c3c',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer'
-              }}
+              className="header__logout-btn"
             >
               Выйти
             </button>
@@ -101,19 +78,13 @@ export default function Header() {
           <>
             <Link
               to="/login"
-              style={{ color: 'white', textDecoration: 'none' }}
+              className="header__login-link"
             >
               Вход
             </Link>
             <Link
               to="/register"
-              style={{
-                padding: '8px 16px',
-                backgroundColor: '#007bff',
-                color: 'white',
-                textDecoration: 'none',
-                borderRadius: '4px'
-              }}
+              className="header__register-link"
             >
               Регистрация
             </Link>

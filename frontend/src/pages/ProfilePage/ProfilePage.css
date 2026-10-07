@@ -1,0 +1,69 @@
+.profile {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.profile__empty {
+  color: #666;
+}
+
+.profile__list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.profile__item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  transition: box-shadow 0.2s;
+}
+
+.profile__item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.profile__item-info {
+  flex: 1;
+}
+
+.profile__item-title {
+  margin: 0 0 5px 0;
+  font-size: 18px;
+}
+
+.profile__item-author {
+  margin: 0 0 5px 0;
+  color: #666;
+}
+
+.profile__item-library {
+  margin: 0;
+  font-size: 14px;
+  color: #888;
+}
+
+.profile__item-meta {
+  text-align: right;
+}
+
+.profile__item-dates {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.profile__badge {
+  display: inline-block;
+  padding: 4px 12px;
+  color: white;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}

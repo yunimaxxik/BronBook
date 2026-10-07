@@ -1,0 +1,96 @@
+.admin-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.admin-page__message {
+  padding: 12px;
+  margin-bottom: 20px;
+  background-color: #e7f3ff;
+  color: #0066cc;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.admin-page__tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.admin-page__tab-btn {
+  padding: 10px 20px;
+  background-color: #ccc;
+  color: #333;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+.admin-page__tab-btn--active {
+  background-color: #007bff;
+  color: white;
+}
+
+.admin-page__tab-btn:hover:not(.admin-page__tab-btn--active) {
+  background-color: #bbb;
+}
+
+.admin-page__form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.admin-page__input,
+.admin-page__textarea,
+.admin-page__select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 15px;
+  transition: border-color 0.2s;
+}
+
+.admin-page__input:focus,
+.admin-page__textarea:focus,
+.admin-page__select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.admin-page__textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.admin-page__submit-btn {
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.admin-page__submit-btn:hover {
+  background-color: #0056b3;
+}
+
+.admin-page__access-denied {
+  padding: 40px 20px;
+  text-align: center;
+  color: #e74c3c;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #ffe6e6;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 40px auto;
+}

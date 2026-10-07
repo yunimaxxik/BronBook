@@ -1,14 +1,16 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../store';
 import { fetchRentals } from '../../features/rentals/rentalsSlice';
 import type { RentalStatus } from '../../interfaces/Rental';
+import './ProfilePage.css';
 
 const statusLabels: Record<RentalStatus, { text: string; color: string }> = {
   reserved: { text: 'Забронирована', color: '#ffa500' },
   active: { text: 'Активна', color: '#007bff' },
-  completed: { text: 'Завершена', color: 'green' },
-  cancelled: { text: 'Отменена', color: 'red' }
+  completed: { text: 'Завершена', color: '#28a745' },
+  cancelled: { text: 'Отменена', color: '#dc3545' }
 };
 
 export default function ProfilePage() {
@@ -22,57 +24,42 @@ export default function ProfilePage() {
   }, [dispatch]);
 
   return (
-    <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '20px' }}>
+    <div className="profile">
       <h1>Мои аренды</h1>
 
       {isLoading ? (
         <p>Загрузка...</p>
       ) : rentals.length === 0 ? (
-        <p>
-          У вас пока нет аренд. <a href="/">Перейти в каталог</a>
+        <p className="profile__empty">
+          У вас пока нет аренд. <Link to="/">Перейти в каталог</Link>
         </p>
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+        <div className="profile__list">
           {rentals.map((rental) => {
             const status = statusLabels[rental.status];
             return (
               <div
                 key={rental.id}
-                style={{
-                  border: '1px solid #ddd',
-                  borderRadius: '8px',
-                  padding: '20px',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center'
-                }}
+                className="profile__item"
               >
-                <div>
-                  <h3 style={{ margin: '0 0 5px 0' }}>
+                <div className="profile__item-info">
+                  <h3 className="profile__item-title">
                     {rental.book?.title || `Книга #${rental.bookId}`}
                   </h3>
-                  <p style={{ margin: '0 0 5px 0', color: '#666' }}>
-                    {rental.book?.author}
-                  </p>
-                  <p style={{ margin: '0', fontSize: '14px', color: '#888' }}>
+                  <p className="profile__item-author">{rental.book?.author}</p>
+                  <p className="profile__item-library">
                     Библиотека: {rental.book?.library?.name || '—'}
                   </p>
                 </div>
 
-                <div style={{ textAlign: 'right' }}>
-                  <p style={{ margin: '0 0 5px 0', fontSize: '14px' }}>
+                <div className="profile__item-meta">
+                  <p className="profile__item-dates">
                     с {new Date(rental.dateStart).toLocaleDateString('ru-RU')}{' '}
                     по {new Date(rental.dateEnd).toLocaleDateString('ru-RU')}
                   </p>
                   <span
-                    style={{
-                      display: 'inline-block',
-                      padding: '4px 12px',
-                      backgroundColor: status.color,
-                      color: 'white',
-                      borderRadius: '12px',
-                      fontSize: '12px'
-                    }}
+                    className="profile__badge"
+                    style={{ backgroundColor: status.color }}
                   >
                     {status.text}
                   </span>

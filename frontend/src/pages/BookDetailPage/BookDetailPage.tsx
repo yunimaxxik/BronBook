@@ -5,6 +5,7 @@ import { RootState, AppDispatch } from '../../store';
 import { api } from '../../api/axios';
 import { Book } from '../../interfaces/Book';
 import { createRental } from '../../features/rentals/rentalsSlice';
+import './BookDetailPage.css';
 
 export default function BookDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -54,47 +55,37 @@ export default function BookDetailPage() {
   };
 
   if (!book) {
-    return <div style={{ padding: '20px' }}>Загрузка...</div>;
+    return <div className="book-detail">Загрузка...</div>;
   }
 
   return (
-    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px' }}>
+    <div className="book-detail">
       <button
         onClick={() => navigate(-1)}
-        style={{ marginBottom: '20px', padding: '8px 16px', cursor: 'pointer' }}
+        className="book-detail__back-btn"
       >
         ← Назад к каталогу
       </button>
 
-      <div style={{ display: 'flex', gap: '30px' }}>
+      <div className="book-detail__content">
         {book.coverImage && (
           <img
             src={`http://localhost:3000${book.coverImage}`}
             alt={book.title}
-            style={{
-              width: '250px',
-              height: '350px',
-              objectFit: 'cover',
-              borderRadius: '8px'
-            }}
+            className="book-detail__image"
           />
         )}
 
-        <div style={{ flex: 1 }}>
-          <h1>{book.title}</h1>
-          <p style={{ fontSize: '18px', color: '#666' }}>
-            Автор: {book.author}
-          </p>
+        <div className="book-detail__info">
+          <h1 className="book-detail__title">{book.title}</h1>
+          <p className="book-detail__author">Автор: {book.author}</p>
           {book.year && <p>Год издания: {book.year}</p>}
           <p>
             Библиотека: <strong>{book.library?.name || 'Неизвестно'}</strong>
           </p>
           <p>Адрес: {book.library?.address || '—'}</p>
           <p
-            style={{
-              color: book.isAvailable ? 'green' : 'red',
-              fontWeight: 'bold'
-            }}
+            className={`book-detail__status ${book.isAvailable ? 'book-detail__status--available' : 'book-detail__status--unavailable'}`}
           >
             {book.isAvailable
               ? `Доступно: ${book.availableCopies} из ${book.totalCopies} экз.`
@@ -107,26 +98,12 @@ export default function BookDetailPage() {
       </div>
 
       {user?.role === 'client' && book.isAvailable && (
-        <div
-          style={{
-            marginTop: '30px',
-            padding: '20px',
-            border: '1px solid #ccc',
-            borderRadius: '8px'
-          }}
-        >
+        <div className="book-detail__rent-section">
           <h2>Забронировать книгу</h2>
 
           {message && (
             <div
-              style={{
-                padding: '10px',
-                marginBottom: '15px',
-                backgroundColor:
-                  messageType === 'success' ? '#e7f3ff' : '#ffe6e6',
-                color: messageType === 'success' ? '#0066cc' : '#c00',
-                borderRadius: '4px'
-              }}
+              className={`book-detail__message book-detail__message--${messageType}`}
             >
               {message}
             </div>
@@ -134,19 +111,19 @@ export default function BookDetailPage() {
 
           <form
             onSubmit={handleRent}
-            style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}
+            className="book-detail__form"
           >
-            <div>
+            <div className="book-detail__input-group">
               <label>Дата получения:</label>
               <input
                 type="date"
                 value={dateStart}
                 onChange={(e) => setDateStart(e.target.value)}
                 required
-                style={{ padding: '8px', width: '100%', marginTop: '5px' }}
+                className="book-detail__input"
               />
             </div>
-            <div>
+            <div className="book-detail__input-group">
               <label>Дата возврата:</label>
               <input
                 type="date"
@@ -154,20 +131,12 @@ export default function BookDetailPage() {
                 onChange={(e) => setDateEnd(e.target.value)}
                 required
                 min={dateStart}
-                style={{ padding: '8px', width: '100%', marginTop: '5px' }}
+                className="book-detail__input"
               />
             </div>
             <button
               type="submit"
-              style={{
-                padding: '12px',
-                backgroundColor: '#007bff',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer',
-                fontSize: '16px'
-              }}
+              className="book-detail__submit-btn"
             >
               Забронировать
             </button>

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../store';
 import { fetchLibraries } from '../../features/books/booksSlice';
 import { api } from '../../api/axios';
+import './AdminPage.css';
 
 export default function AdminPage() {
   const dispatch = useDispatch<AppDispatch>();
@@ -79,51 +80,28 @@ export default function AdminPage() {
 
   if (user?.role !== 'admin') {
     return (
-      <div style={{ padding: '20px' }}>
+      <div className="admin-page__access-denied">
         Доступ запрещён. Требуются права администратора.
       </div>
     );
   }
 
   return (
-    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px' }}>
+    <div className="admin-page">
       <h1>Админ-панель</h1>
 
-      {message && (
-        <div
-          style={{
-            padding: '10px',
-            marginBottom: '20px',
-            backgroundColor: '#e7f3ff',
-            borderRadius: '4px'
-          }}
-        >
-          {message}
-        </div>
-      )}
+      {message && <div className="admin-page__message">{message}</div>}
 
-      <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
+      <div className="admin-page__tabs">
         <button
+          className={`admin-page__tab-btn ${activeTab === 'library' ? 'admin-page__tab-btn--active' : ''}`}
           onClick={() => setActiveTab('library')}
-          style={{
-            padding: '10px 20px',
-            backgroundColor: activeTab === 'library' ? '#007bff' : '#ccc',
-            color: 'white',
-            border: 'none',
-            cursor: 'pointer'
-          }}
         >
           Добавить библиотеку
         </button>
         <button
+          className={`admin-page__tab-btn ${activeTab === 'book' ? 'admin-page__tab-btn--active' : ''}`}
           onClick={() => setActiveTab('book')}
-          style={{
-            padding: '10px 20px',
-            backgroundColor: activeTab === 'book' ? '#007bff' : '#ccc',
-            color: 'white',
-            border: 'none',
-            cursor: 'pointer'
-          }}
         >
           Добавить книгу
         </button>
@@ -132,7 +110,7 @@ export default function AdminPage() {
       {activeTab === 'library' && (
         <form
           onSubmit={handleCreateLibrary}
-          style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}
+          className="admin-page__form"
         >
           <input
             type="text"
@@ -140,7 +118,7 @@ export default function AdminPage() {
             value={libName}
             onChange={(e) => setLibName(e.target.value)}
             required
-            style={{ padding: '8px' }}
+            className="admin-page__input"
           />
           <input
             type="text"
@@ -148,17 +126,17 @@ export default function AdminPage() {
             value={libAddress}
             onChange={(e) => setLibAddress(e.target.value)}
             required
-            style={{ padding: '8px' }}
+            className="admin-page__input"
           />
           <textarea
             placeholder="Описание"
             value={libDescription}
             onChange={(e) => setLibDescription(e.target.value)}
-            style={{ padding: '8px', minHeight: '100px' }}
+            className="admin-page__textarea"
           />
           <button
             type="submit"
-            style={{ padding: '10px', cursor: 'pointer' }}
+            className="admin-page__submit-btn"
           >
             Создать библиотеку
           </button>
@@ -168,7 +146,7 @@ export default function AdminPage() {
       {activeTab === 'book' && (
         <form
           onSubmit={handleCreateBook}
-          style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}
+          className="admin-page__form"
         >
           <input
             type="text"
@@ -176,7 +154,7 @@ export default function AdminPage() {
             value={bookTitle}
             onChange={(e) => setBookTitle(e.target.value)}
             required
-            style={{ padding: '8px' }}
+            className="admin-page__input"
           />
           <input
             type="text"
@@ -184,26 +162,26 @@ export default function AdminPage() {
             value={bookAuthor}
             onChange={(e) => setBookAuthor(e.target.value)}
             required
-            style={{ padding: '8px' }}
+            className="admin-page__input"
           />
           <input
             type="number"
             placeholder="Год издания"
             value={bookYear}
             onChange={(e) => setBookYear(e.target.value)}
-            style={{ padding: '8px' }}
+            className="admin-page__input"
           />
           <textarea
             placeholder="Описание"
             value={bookDescription}
             onChange={(e) => setBookDescription(e.target.value)}
-            style={{ padding: '8px', minHeight: '100px' }}
+            className="admin-page__textarea"
           />
           <select
             value={bookLibraryId}
             onChange={(e) => setBookLibraryId(e.target.value)}
             required
-            style={{ padding: '8px' }}
+            className="admin-page__select"
           >
             <option value="">Выберите библиотеку</option>
             {libraries.map((lib) => (
@@ -222,17 +200,17 @@ export default function AdminPage() {
             onChange={(e) => setBookTotalCopies(e.target.value)}
             min="1"
             required
-            style={{ padding: '8px' }}
+            className="admin-page__input"
           />
           <input
             type="file"
             accept="image/*"
             onChange={(e) => setBookCoverImage(e.target.files?.[0] || null)}
-            style={{ padding: '8px' }}
+            className="admin-page__input"
           />
           <button
             type="submit"
-            style={{ padding: '10px', cursor: 'pointer' }}
+            className="admin-page__submit-btn"
           >
             Создать книгу
           </button>

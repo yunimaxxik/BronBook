@@ -8,6 +8,7 @@ import {
   setFilter,
   clearFilters
 } from '../../features/books/booksSlice';
+import './CatalogPage.css';
 
 export default function CatalogPage() {
   const dispatch = useDispatch<AppDispatch>();
@@ -23,48 +24,29 @@ export default function CatalogPage() {
     dispatch(fetchBooks());
   }, [dispatch, filters]);
 
-  const handleSearch = () => {
-    dispatch(fetchBooks());
-  };
-
-  const handleClear = () => {
-    dispatch(clearFilters());
-  };
+  const handleSearch = () => dispatch(fetchBooks());
+  const handleClear = () => dispatch(clearFilters());
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
+    <div className="catalog">
       <h1>Каталог книг</h1>
 
-      {/* Фильтры */}
-      <div
-        style={{
-          marginBottom: '30px',
-          padding: '20px',
-          border: '1px solid #ccc',
-          borderRadius: '8px'
-        }}
-      >
+      <div className="catalog__filters">
         <h3>Фильтры</h3>
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-            gap: '15px'
-          }}
-        >
+        <div className="catalog__filters-grid">
           <input
             type="text"
             placeholder="Название книги"
             value={filters.title}
             onChange={(e) => dispatch(setFilter({ title: e.target.value }))}
-            style={{ padding: '8px' }}
+            className="catalog__input"
           />
           <input
             type="text"
             placeholder="Автор"
             value={filters.author}
             onChange={(e) => dispatch(setFilter({ author: e.target.value }))}
-            style={{ padding: '8px' }}
+            className="catalog__input"
           />
           <select
             value={filters.libraryId || ''}
@@ -75,7 +57,7 @@ export default function CatalogPage() {
                 })
               )
             }
-            style={{ padding: '8px' }}
+            className="catalog__select"
           >
             <option value="">Все библиотеки</option>
             {libraries.map((lib) => (
@@ -87,7 +69,7 @@ export default function CatalogPage() {
               </option>
             ))}
           </select>
-          <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <label className="catalog__checkbox-label">
             <input
               type="checkbox"
               checked={filters.availableOnly}
@@ -98,86 +80,54 @@ export default function CatalogPage() {
             Только доступные
           </label>
         </div>
-        <div style={{ marginTop: '15px', display: 'flex', gap: '10px' }}>
+        <div className="catalog__buttons">
           <button
             onClick={handleSearch}
-            style={{ padding: '8px 16px', cursor: 'pointer' }}
+            className="catalog__btn catalog__btn--primary"
           >
             Искать
           </button>
           <button
             onClick={handleClear}
-            style={{ padding: '8px 16px', cursor: 'pointer' }}
+            className="catalog__btn"
           >
             Сбросить
           </button>
         </div>
       </div>
 
-      {/* Список книг */}
       {isLoading ? (
         <p>Загрузка...</p>
       ) : books.length === 0 ? (
         <p>Книги не найдены</p>
       ) : (
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-            gap: '20px'
-          }}
-        >
+        <div className="catalog__grid">
           {books.map((book) => (
             <Link
               key={book.id}
               to={`/books/${book.id}`}
-              style={{ textDecoration: 'none', color: 'inherit' }}
+              className="catalog__card"
             >
-              <div
-                key={book.id}
-                style={{
-                  border: '1px solid #ddd',
-                  borderRadius: '8px',
-                  padding: '15px'
-                }}
+              {book.coverImage && (
+                <img
+                  src={`http://localhost:3000${book.coverImage}`}
+                  alt={book.title}
+                  className="catalog__card-image"
+                />
+              )}
+              <h3 className="catalog__card-title">{book.title}</h3>
+              <p className="catalog__card-author">{book.author}</p>
+              {book.year && <p className="catalog__card-meta">{book.year}</p>}
+              <p className="catalog__card-meta">
+                Библиотека: {book.library?.name || 'Неизвестно'}
+              </p>
+              <p
+                className={`catalog__card-status ${book.isAvailable ? 'catalog__card-status--available' : 'catalog__card-status--unavailable'}`}
               >
-                {book.coverImage && (
-                  <img
-                    src={`http://localhost:3000${book.coverImage}`}
-                    alt={book.title}
-                    style={{
-                      width: '100%',
-                      height: '200px',
-                      objectFit: 'cover',
-                      borderRadius: '4px',
-                      marginBottom: '10px'
-                    }}
-                  />
-                )}
-                <h3 style={{ margin: '0 0 5px 0' }}>{book.title}</h3>
-                <p style={{ margin: '0 0 5px 0', color: '#666' }}>
-                  {book.author}
-                </p>
-                {book.year && (
-                  <p style={{ margin: '0 0 5px 0', fontSize: '14px' }}>
-                    {book.year}
-                  </p>
-                )}
-                <p style={{ margin: '0 0 5px 0', fontSize: '14px' }}>
-                  Библиотека: {book.library?.name || 'Неизвестно'}
-                </p>
-                <p
-                  style={{
-                    margin: '0',
-                    fontSize: '14px',
-                    color: book.isAvailable ? 'green' : 'red'
-                  }}
-                >
-                  {book.isAvailable
-                    ? `Доступно: ${book.availableCopies} из ${book.totalCopies}`
-                    : 'Недоступно'}
-                </p>
-              </div>
+                {book.isAvailable
+                  ? `Доступно: ${book.availableCopies} из ${book.totalCopies}`
+                  : 'Недоступно'}
+              </p>
             </Link>
           ))}
         </div>
