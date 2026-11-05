@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, Like } from 'typeorm';
+import { Repository, Like, MoreThan } from 'typeorm';
 import { Library } from './entities/library.entity.js';
 import { Book } from './entities/book.entity.js';
 
@@ -61,7 +61,8 @@ export class LibrariesService {
     if (params.library) where.libraryId = params.library;
     if (params.author) where.author = Like(`%${params.author}%`);
     if (params.title) where.title = Like(`%${params.title}%`);
-    if (params.availableOnly) where.isAvailable = true;
+    
+    if (params.availableOnly) where.availableCopies = MoreThan(0); 
 
     return this.bookRepository.find({
       where,

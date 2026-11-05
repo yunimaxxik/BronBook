@@ -1,9 +1,8 @@
-// frontend/src/components/Header.tsx
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../store';
 import { logout } from '../../features/auth/authSlice';
-import './Header.css'; // <-- Импортируем CSS файл
+import './Header.css';
 
 export default function Header() {
   const dispatch = useDispatch<AppDispatch>();
@@ -22,8 +21,7 @@ export default function Header() {
           to="/"
           className="header__logo"
         >
-          <img src="../../assets/books.svg" />
-          BronBook
+          📚 BronBook
         </Link>
 
         {user && (
@@ -71,7 +69,6 @@ export default function Header() {
           <>
             <span className="header__user-info">
               Привет, <strong>{user.name}</strong>!
-              <span className="header__user-role">({user.role})</span>
             </span>
             <button
               onClick={handleLogout}

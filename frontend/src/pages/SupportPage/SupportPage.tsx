@@ -26,7 +26,7 @@ export default function SupportPage() {
   const [showCreateForm, setShowCreateForm] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchClientRequests());
+    dispatch(fetchClientRequests({}));
   }, [dispatch]);
 
   const handleSelectRequest = (request: any) => {
@@ -41,7 +41,7 @@ export default function SupportPage() {
     await dispatch(createSupportRequest(newRequestText));
     setNewRequestText('');
     setShowCreateForm(false);
-    dispatch(fetchClientRequests());
+    dispatch(fetchClientRequests({}));
   };
 
   const handleSendMessage = async (e: React.FormEvent) => {

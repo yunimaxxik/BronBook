@@ -62,9 +62,7 @@ export default function AdminPage() {
       formData.append('totalCopies', bookTotalCopies);
       if (bookCoverImage) formData.append('coverImage', bookCoverImage);
 
-      await api.post('/api/admin/books', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      });
+      await api.post('/api/admin/books', formData);
       setMessage('Книга успешно создана!');
       setBookTitle('');
       setBookAuthor('');

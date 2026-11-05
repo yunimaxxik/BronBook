@@ -2,9 +2,11 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module.js';
 import session from 'express-session';
 import { ValidationPipe } from '@nestjs/common';
-import * as passport from 'passport'; 
+import passport from 'passport'; 
 import { SanitizePipe } from './common/guards/sanitize.pipe.js'; 
 import { SessionIoAdapter } from './common/adapters/session-io.adapter.js';
+import { join } from 'path'; 
+import * as express from 'express';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -18,6 +20,8 @@ async function bootstrap() {
     origin: 'http://localhost:5173',
     credentials: true,
   });
+
+  app.use('/uploads', express.static(join(process.cwd(), 'uploads')));
 
   const sessionMiddleware = session({
     secret: 'your-super-secret-diploma-key',

@@ -11,7 +11,6 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { AuthGuard } from '@nestjs/passport';
 import { LibrariesService, SearchBookParams } from './libraries.service.js';
 import { CreateLibraryDto } from './dto/create-library.dto.js';
 import { Roles, RolesGuard } from '../common/guards/roles.guard.js';
@@ -60,7 +59,7 @@ export class LibrariesController {
     return this.librariesService.createLibrary(dto);
   }
 
-  @UseGuards(AuthGuard('local'), RolesGuard)
+  @UseGuards(SessionAuthGuard, RolesGuard) 
   @Roles('admin')
   @Post('api/admin/books')
   @UseInterceptors(

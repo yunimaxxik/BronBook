@@ -1,86 +1,78 @@
 .header {
-  background-color: #1a1a2e;
-  color: white;
-  padding: 15px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: var(--primary);
+  height: 72px;
+  padding: 0 40px;
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.header__left {
+.header__left,
+.header__right {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 32px;
 }
 
 .header__logo {
+  font-size: 24px;
+  font-weight: 700;
   color: white;
-  text-decoration: none;
-  font-size: 20px;
-  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.5px;
 }
 
 .header__nav {
   display: flex;
-  gap: 20px;
+  gap: 24px;
 }
 
 .header__nav-link {
+  color: #cbd5e1;
+  font-weight: 500;
+  font-size: 15px;
+  transition: color 0.2s;
+}
+
+.header__nav-link:hover {
   color: white;
-  text-decoration: none;
-}
-
-.header__nav-link--admin {
-  color: #ffd700;
-}
-
-.header__nav-link--manager {
-  color: #90ee90;
-}
-
-.header__right {
-  display: flex;
-  align-items: center;
-  gap: 20px;
 }
 
 .header__user-info {
   font-size: 14px;
+  color: #cbd5e1;
 }
 
-.header__user-role {
-  margin-left: 8px;
-  font-size: 12px;
-  color: #aaa;
+.header__user-info strong {
+  color: white;
 }
 
 .header__logout-btn {
+  background-color: transparent;
+  color: #fca5a5;
+  border: 1px solid #fca5a5;
   padding: 8px 16px;
-  background-color: #e74c3c;
-  color: white;
-  border: none;
-  border-radius: 4px;
+  border-radius: 8px;
+  font-size: 14px;
   cursor: pointer;
+  transition: all 0.2s;
 }
 
 .header__logout-btn:hover {
-  background-color: #c0392b;
+  background-color: #fca5a5;
+  color: var(--primary);
 }
 
-.header__login-link {
-  color: white;
-  text-decoration: none;
-}
-
+.header__login-link,
 .header__register-link {
-  padding: 8px 16px;
-  background-color: #007bff;
   color: white;
-  text-decoration: none;
-  border-radius: 4px;
-}
-
-.header__register-link:hover {
-  background-color: #0056b3;
+  font-weight: 500;
+  font-size: 15px;
 }

@@ -1,119 +1,135 @@
 .book-detail {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
 
 .book-detail__back-btn {
-  margin-bottom: 20px;
-  padding: 8px 16px;
-  background: transparent;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 16px;
   cursor: pointer;
-  transition: all 0.2s;
+  margin-bottom: 24px;
+  transition: color 0.2s;
 }
 
 .book-detail__back-btn:hover {
-  background-color: #f0f0f0;
+  color: var(--accent);
 }
 
 .book-detail__content {
   display: flex;
-  gap: 30px;
+  gap: 40px;
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  margin-bottom: 40px;
 }
 
 .book-detail__image {
-  width: 250px;
-  height: 350px;
+  width: 300px;
+  height: 450px;
   object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
 .book-detail__info {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
-
 .book-detail__title {
-  margin-top: 0;
-  margin-bottom: 10px;
+  font-size: 32px;
+  color: var(--primary);
 }
-
 .book-detail__author {
   font-size: 18px;
-  color: #666;
-  margin-bottom: 10px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
 }
 
 .book-detail__status {
-  font-weight: bold;
-  margin-top: 15px;
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  width: max-content;
 }
 
 .book-detail__status--available {
-  color: #28a745;
+  background: #dcfce7;
+  color: #166534;
 }
-
 .book-detail__status--unavailable {
-  color: #dc3545;
+  background: #fee2e2;
+  color: #991b1b;
 }
 
 .book-detail__rent-section {
-  margin-top: 30px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #fafafa;
+  background: white;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
-.book-detail__message {
-  padding: 10px;
-  margin-bottom: 15px;
-  border-radius: 4px;
-  font-weight: 500;
-}
-
-.book-detail__message--success {
-  background-color: #e7f3ff;
-  color: #0066cc;
-}
-
-.book-detail__message--error {
-  background-color: #ffe6e6;
-  color: #c00;
+.book-detail__rent-section h2 {
+  margin-bottom: 24px;
+  font-size: 24px;
 }
 
 .book-detail__form {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  gap: 20px;
+  align-items: flex-end;
+  flex-wrap: wrap;
 }
-
 .book-detail__input-group {
   display: flex;
   flex-direction: column;
+  gap: 8px;
 }
-
+.book-detail__input-group label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
 .book-detail__input {
-  padding: 8px;
-  width: 100%;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  outline: none;
 }
-
 .book-detail__submit-btn {
-  padding: 12px;
-  background-color: #007bff;
+  padding: 12px 24px;
+  background: var(--accent);
   color: white;
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  border-radius: 8px;
   font-size: 16px;
-  transition: background-color 0.2s;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.book-detail__submit-btn:hover {
+  background: var(--accent-hover);
 }
 
-.book-detail__submit-btn:hover {
-  background-color: #0056b3;
+.book-detail__message {
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.book-detail__message--success {
+  background: #dcfce7;
+  color: #166534;
+}
+.book-detail__message--error {
+  background: #fee2e2;
+  color: #991b1b;
 }
