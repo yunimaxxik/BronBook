@@ -33,7 +33,7 @@ export class Message {
   @JoinColumn({ name: 'authorId' })
   author: User;
 
-  @ManyToOne('SupportRequest', (sr) => sr.messages, { onDelete: 'CASCADE' })
+  @ManyToOne('SupportRequest', (sr: SupportRequest) => sr.messages, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'supportRequestId' })
   supportRequest: SupportRequest;
 }

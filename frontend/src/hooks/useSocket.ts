@@ -13,14 +13,12 @@ export const useSocket = () => {
   useEffect(() => {
     if (!user) return;
 
-    const socket = io(import.meta.env.VITE_WS_URL || 'ws://localhost:3000', {
-      query: { userId: user.id.toString() },
+    const socket = io(import.meta.env.VITE_WS_URL || 'http://localhost:3000', {
       withCredentials: true
     });
 
     socketRef.current = socket;
 
-    // Слушаем новые сообщения
     socket.on('newMessage', (message: Message) => {
       dispatch(addMessage(message));
     });

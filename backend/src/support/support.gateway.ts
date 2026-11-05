@@ -1,9 +1,6 @@
 import {
-  WebSocketGateway,
-  WebSocketServer,
-  SubscribeMessage,
-  OnGatewayConnection,
-  OnGatewayDisconnect,
+  WebSocketGateway, WebSocketServer, SubscribeMessage,
+  OnGatewayConnection, OnGatewayDisconnect,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { Injectable } from '@nestjs/common';
@@ -16,9 +13,7 @@ import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
   },
 })
 @Injectable()
-export class SupportGateway
-  implements OnGatewayConnection, OnGatewayDisconnect
-{
+export class SupportGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer()
   server: Server;
 
@@ -27,21 +22,34 @@ export class SupportGateway
   constructor(private eventEmitter: EventEmitter2) {}
 
   handleConnection(client: Socket) {
-    const userId = Number(client.handshake.query.userId);
-    if (userId) {
-      this.connectedClients.set(userId, client);
+    const session = (client.request as any).session;
+    
+    const userId = session?.passport?.user;
+
+    if (!userId) {
+      console.log(`Подключение отклонено: нет валидной сессии`);
+      client.disconnect(); 
+      return;
     }
+
+    this.connectedClients.set(Number(userId), client);
+    console.log(`WebSocket подключен: пользователь ${userId}`);
   }
 
   handleDisconnect(client: Socket) {
-    const userId = Number(client.handshake.query.userId);
-    if (userId) {
-      this.connectedClients.delete(userId);
+    for (const [userId, socket] of this.connectedClients.entries()) {
+      if (socket.id === client.id) {
+        this.connectedClients.delete(userId);
+        break;
+      }
     }
   }
 
   @SubscribeMessage('subscribeToChat')
   handleSubscribe(client: Socket, chatId: number) {
+    const session = (client.request as any).session;
+    const userId = session?.passport?.user;
+
     client.join(`chat_${chatId}`);
     return { event: 'subscribed', data: chatId };
   }

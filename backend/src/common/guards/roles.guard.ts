@@ -8,7 +8,6 @@ import { Reflector } from '@nestjs/core';
 
 export const ROLES_KEY = 'roles';
 
-// Декоратор для указания ролей
 import { SetMetadata } from '@nestjs/common';
 export const Roles = (...roles: string[]) => SetMetadata(ROLES_KEY, roles);
 

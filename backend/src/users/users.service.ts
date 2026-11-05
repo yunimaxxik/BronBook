@@ -30,6 +30,17 @@ export class UsersService implements IUserService {
     return this.usersRepository.save(user);
   }
 
+  async update(id: number, updateData: Partial<User>): Promise<User> {
+    const user = await this.findById(id);
+    Object.assign(user, updateData);
+    return this.usersRepository.save(user);
+  }
+
+  async remove(id: number): Promise<void> {
+    const user = await this.findById(id);
+    await this.usersRepository.remove(user);
+  }
+
   async findById(id: number): Promise<User> {
     const user = await this.usersRepository.findOne({ where: { id } });
     if (!user) {

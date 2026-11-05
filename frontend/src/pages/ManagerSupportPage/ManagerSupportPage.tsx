@@ -10,7 +10,7 @@ import {
   setCurrentRequest
 } from '../../features/support/supportSlice';
 import { useSocket } from '../../hooks/useSocket';
-import './SupportPage.css';
+import './ManagerSupportPage.css';
 
 export default function ManagerSupportPage() {
   const dispatch = useDispatch<AppDispatch>();
@@ -26,7 +26,7 @@ export default function ManagerSupportPage() {
   );
 
   useEffect(() => {
-    dispatch(fetchManagerRequests(filterActive));
+    dispatch(fetchManagerRequests({ isActive: filterActive }));
   }, [dispatch, filterActive]);
 
   const handleSelectRequest = (request: any) => {
@@ -49,7 +49,7 @@ export default function ManagerSupportPage() {
     if (!currentRequest) return;
     await dispatch(closeRequest(currentRequest.id));
     dispatch(setCurrentRequest(null));
-    dispatch(fetchManagerRequests(filterActive));
+    dispatch(fetchManagerRequests({ isActive: filterActive }));
   };
 
   return (
